@@ -1,49 +1,175 @@
+/* Corpo da página */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #181818;
-    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #121212;
+    color: #fff;
     margin: 0;
     padding: 0;
+}
+
+/* Container principal do player */
+.player-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #1C1C1C;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Capa do álbum com desfoque */
+.album-info {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.album-info img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1s ease-in-out;
+}
+
+/* Efeito de desfoque e transição para a capa */
+.album-info:hover img {
+    transform: scale(1.1);
+    filter: blur(8px);
+}
+
+/* Título e nome do artista sobre a capa */
+.album-info .overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    z-index: 2;
+}
+
+.album-info .overlay h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.album-info .overlay h2 {
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+/* Botões de controle (play, pausa, próximo, anterior) */
+.controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.control-btn {
+    background-color: #1DB954;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    margin: 0 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+.control-btn:hover {
+    background-color: #1ed760;
+}
+
+.control-btn:active {
+    background-color: #1bdf5b;
+}
+
+/* Barra de progresso */
+.progress-bar-container {
+    margin-top: 20px;
+    position: relative;
+    height: 5px;
+    background-color: #333;
+    border-radius: 2.5px;
+}
+
+.progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #1DB954;
+    border-radius: 2.5px;
+    transition: width 0.1s ease-in-out;
+}
+
+/* Estilos do player quando está ativo */
+#audio {
+    display: none;
+}
+
+/* Tela de login */
+.login-screen {
+    background: #121212;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
-.player {
-    width: 80%;
-    max-width: 500px;
+.login-container {
+    background: #1C1C1C;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
     text-align: center;
+    width: 100%;
+    max-width: 400px;
 }
 
-.login input {
-    margin: 10px;
-    padding: 10px;
-    width: 80%;
-    border: none;
-    border-radius: 5px;
+.login-container h1 {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 20px;
 }
 
-.login button {
-    padding: 10px 20px;
+.login-container input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    background: #333;
     border: none;
-    background-color: #1db954;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.login-container input:focus {
+    outline: none;
+    border: 2px solid #1DB954;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 15px;
+    background-color: #1DB954;
+    border: none;
+    border-radius: 10px;
     color: white;
-    border-radius: 5px;
+    font-size: 1rem;
     cursor: pointer;
 }
 
-.music-player input {
-    margin: 10px;
-    padding: 10px;
-    width: 80%;
+.login-container button:hover {
+    background-color: #1ed760;
 }
 
-.music-player button {
-    padding: 10px 20px;
-    background-color: #1db954;
-    border: none;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
+.login-container button:active {
+    background-color: #1bdf5b;
 }
