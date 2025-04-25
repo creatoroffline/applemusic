@@ -1,25 +1,55 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EchoMave Music</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="player">
-        <div class="login">
-            <input type="email" id="email" placeholder="Digite seu email">
-            <input type="password" id="password" placeholder="Digite sua senha">
-            <button onclick="login()">Login</button>
-        </div>
-        <div class="music-player">
-            <input type="file" id="music" accept="audio/*">
-            <button onclick="playMusic()">Tocar Música</button>
-            <audio id="audio" controls></audio>
-        </div>
-    </div>
+let isPlaying = false;
+let currentSongIndex = 0;
 
-    <script src="script.js"></script>
-</body>
-</html>
+const songs = [
+    {
+        title: "Música 1",
+        artist: "Artista 1",
+        src: "link-da-musica1.mp3",
+        albumCover: "link-da-capa1.jpg"
+    },
+    {
+        title: "Música 2",
+        artist: "Artista 2",
+        src: "link-da-musica2.mp3",
+        albumCover: "link-da-capa2.jpg"
+    }
+];
+
+const audio = document.getElementById('audio');
+const songTitle = document.getElementById('song-title');
+const songArtist = document.getElementById('song-artist');
+const albumCover = document.getElementById('album-cover');
+
+function loadSong(songIndex) {
+    const song = songs[songIndex];
+    songTitle.textContent = song.title;
+    songArtist.textContent = song.artist;
+    albumCover.src = song.albumCover;
+    audio.src = song.src;
+}
+
+function togglePlay() {
+    if (isPlaying) {
+        audio.pause();
+    } else {
+        audio.play();
+    }
+    isPlaying = !isPlaying;
+}
+
+function prevSong() {
+    currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+    loadSong(currentSongIndex);
+    audio.play();
+}
+
+function nextSong() {
+    currentSongIndex = (currentSongIndex + 1) % songs.length;
+    loadSong(currentSongIndex);
+    audio.play();
+}
+
+audio.addEventListener('ended', nextSong);
+
+loadSong(currentSongIndex); // Carrega a primeira música ao iniciar
