@@ -1,55 +1,38 @@
-let isPlaying = false;
-let currentSongIndex = 0;
+document.addEventListener("DOMContentLoaded", function() {
+    const audio = document.getElementById('audio');
+    const playBtn = document.getElementById('play-btn');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const progressBar = document.getElementById('progress-bar');
+    
+    let isPlaying = false;
 
-const songs = [
-    {
-        title: "Música 1",
-        artist: "Artista 1",
-        src: "link-da-musica1.mp3",
-        albumCover: "link-da-capa1.jpg"
-    },
-    {
-        title: "Música 2",
-        artist: "Artista 2",
-        src: "link-da-musica2.mp3",
-        albumCover: "link-da-capa2.jpg"
-    }
-];
+    // Função para alternar play/pause
+    playBtn.addEventListener('click', function() {
+        if (isPlaying) {
+            audio.pause();
+            playBtn.innerHTML = "&#9654;"; // Play icon
+        } else {
+            audio.play();
+            playBtn.innerHTML = "&#10074;&#10074;"; // Pause icon
+        }
+        isPlaying = !isPlaying;
+    });
 
-const audio = document.getElementById('audio');
-const songTitle = document.getElementById('song-title');
-const songArtist = document.getElementById('song-artist');
-const albumCover = document.getElementById('album-cover');
+    // Atualizar barra de progresso
+    audio.addEventListener('timeupdate', function() {
+        const progress = (audio.currentTime / audio.duration) * 100;
+        progressBar.style.width = progress + "%";
+    });
 
-function loadSong(songIndex) {
-    const song = songs[songIndex];
-    songTitle.textContent = song.title;
-    songArtist.textContent = song.artist;
-    albumCover.src = song.albumCover;
-    audio.src = song.src;
-}
+    // Funções de controle de próxima e anterior música
+    nextBtn.addEventListener('click', function() {
+        // Lógica para próxima música (ajustar conforme sua biblioteca de músicas)
+        console.log("Próxima música");
+    });
 
-function togglePlay() {
-    if (isPlaying) {
-        audio.pause();
-    } else {
-        audio.play();
-    }
-    isPlaying = !isPlaying;
-}
-
-function prevSong() {
-    currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
-    loadSong(currentSongIndex);
-    audio.play();
-}
-
-function nextSong() {
-    currentSongIndex = (currentSongIndex + 1) % songs.length;
-    loadSong(currentSongIndex);
-    audio.play();
-}
-
-audio.addEventListener('ended', nextSong);
-
-loadSong(currentSongIndex); // Carrega a primeira música ao iniciar
+    prevBtn.addEventListener('click', function() {
+        // Lógica para música anterior (ajustar conforme sua biblioteca de músicas)
+        console.log("Música anterior");
+    });
+});
