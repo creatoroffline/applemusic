@@ -36,3 +36,55 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("Música anterior");
     });
 });
+const clientId = 'SEU_CLIENT_ID'; // Substitua pelo seu Client ID
+const clientSecret = 'SEU_CLIENT_SECRET'; // Substitua pelo seu Client Secret
+let accessToken = '';
+
+// Função para obter o token de acesso
+async function getAccessToken() {
+    const response = await fetch('https://accounts.spotify.com/api/token', {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret),
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'grant_type=client_credentials'
+    });
+    const data = await response.json();
+    accessToken = data.access_token;
+}
+
+// Função para pesquisar artistas
+async function searchArtist(query) {
+    const response = await fetch(`https://api.spotify.com/v1/search?q=${query}&type=artist`, {
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        }
+    });
+    const data = await response.json();
+    return data.artists.items;
+}
+
+// Função para exibir os artistas encontrados
+function displayArtists(artists) {
+    const resultsContainer = document.getElementById('search-results');
+    resultsContainer.innerHTML = '';
+    artists.forEach(artist => {
+        const artistDiv = document.createElement('div');
+        artistDiv.classList.add('artist');
+        artistDiv.innerHTML = `
+            <img src="${artist.images[0].url}" alt="${artist.name}" />
+            <h3>${artist.name}</h3>
+        `;
+        resultsContainer.appendChild(artistDiv);
+    });
+}
+
+// Chama a função para obter o token e depois realizar a pesquisa
+getAccessToken().then(() => {
+    document.getElementById('search-btn').addEventListener('click', async () => {
+        const query = document.getElementById('search-input').value;
+        const artists = await searchArtist(query);
+        displayArtists(artists);
+    });
+});
