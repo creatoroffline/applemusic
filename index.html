@@ -4,21 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EchoMave Music</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="player">
-        <div class="login">
-            <input type="email" id="email" placeholder="Digite seu email">
-            <input type="password" id="password" placeholder="Digite sua senha">
-            <button onclick="login()">Login</button>
+<body class="bg-gray-800 text-white">
+
+    <div class="player-container max-w-4xl mx-auto">
+        <div class="album-info relative text-center py-6">
+            <img id="album-cover" class="w-full h-full object-cover rounded-xl blur-sm" src="" alt="Capa do álbum">
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="text-center">
+                    <h1 id="song-title" class="text-2xl font-bold">Nome da Música</h1>
+                    <h2 id="song-artist" class="text-lg font-light">Nome do Artista</h2>
+                </div>
+            </div>
         </div>
-        <div class="music-player">
-            <input type="file" id="music" accept="audio/*">
-            <button onclick="playMusic()">Tocar Música</button>
-            <audio id="audio" controls></audio>
+
+        <div class="controls flex justify-center space-x-4 py-4">
+            <button class="control-btn" onclick="prevSong()">Anterior</button>
+            <button class="control-btn" onclick="togglePlay()">Play/Pause</button>
+            <button class="control-btn" onclick="nextSong()">Próxima</button>
         </div>
     </div>
+
+    <audio id="audio" class="hidden" controls></audio>
 
     <script src="script.js"></script>
 </body>
