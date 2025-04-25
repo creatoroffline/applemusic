@@ -1,33 +1,41 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EchoMave Music</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
+    <title>EchoMave</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-800 text-white">
-
-    <div class="player-container max-w-4xl mx-auto">
-        <div class="album-info relative text-center py-6">
-            <img id="album-cover" class="w-full h-full object-cover rounded-xl blur-sm" src="" alt="Capa do álbum">
-            <div class="absolute inset-0 flex items-center justify-center">
-                <div class="text-center">
-                    <h1 id="song-title" class="text-2xl font-bold">Nome da Música</h1>
-                    <h2 id="song-artist" class="text-lg font-light">Nome do Artista</h2>
-                </div>
-            </div>
-        </div>
-
-        <div class="controls flex justify-center space-x-4 py-4">
-            <button class="control-btn" onclick="prevSong()">Anterior</button>
-            <button class="control-btn" onclick="togglePlay()">Play/Pause</button>
-            <button class="control-btn" onclick="nextSong()">Próxima</button>
+<body>
+    <!-- Tela de Login -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-container">
+            <h1>Bem-vindo ao EchoMave</h1>
+            <input type="text" id="username" placeholder="Usuário" required>
+            <input type="password" id="password" placeholder="Senha" required>
+            <button id="login-button">Entrar</button>
         </div>
     </div>
 
-    <audio id="audio" class="hidden" controls></audio>
+    <!-- Player de Música -->
+    <div id="player-container" class="player-container">
+        <div class="album-info">
+            <img src="album.jpg" alt="Capa do Álbum">
+            <div class="overlay">
+                <h1 id="album-title">Nome do Álbum</h1>
+                <h2 id="artist-name">Artista</h2>
+            </div>
+        </div>
+        <div class="controls">
+            <button class="control-btn" id="prev-btn">&#9664;</button>
+            <button class="control-btn" id="play-btn">&#9654;</button>
+            <button class="control-btn" id="next-btn">&#9654;&#9654;</button>
+        </div>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <audio id="audio" src="musica.mp3"></audio>
+    </div>
 
     <script src="script.js"></script>
 </body>
